@@ -1,15 +1,28 @@
 # snapshot/snapshot_writer.py
 import json
 import os
+import glob
 from datetime import datetime
 
 SNAPSHOT_DIR = "snapshots"
 SNAPSHOT_PREFIX = "snapshot"
+MAX_SNAPSHOTS = 20  # Keep the most recent 20
+
+def rotate_snapshots(directory):
+    files = sorted(
+        glob.glob(os.path.join(directory, "*.lasnap")),
+        key=os.path.getctime
+    )
+    if len(files) > MAX_SNAPSHOTS:
+        for f in files[:-MAX_SNAPSHOTS]:
+            os.remove(f)
+            print(f"[–] Deleted old snapshot: {f}")
 
 def write_snapshot(data, metadata=None):
-    """Save captured serial data to a .lasnap snapshot file."""
     if not os.path.exists(SNAPSHOT_DIR):
         os.makedirs(SNAPSHOT_DIR)
+
+    rotate_snapshots(SNAPSHOT_DIR)
 
     timestamp = datetime.utcnow().strftime("%Y%m%d-%H%M%S")
     filename = f"{SNAPSHOT_PREFIX}_{timestamp}.lasnap"
@@ -31,10 +44,10 @@ def write_snapshot(data, metadata=None):
     print(f"[+] Snapshot saved: {filepath}")
     return filepath
 
-# Example usage:
+# Test
 if __name__ == "__main__":
-    test_data = [
+    sample_data = [
         {"ts": "2025-04-29T15:30:00Z", "raw": "D000100000F*"},
         {"ts": "2025-04-29T15:30:01Z", "raw": "D000200000F*"},
     ]
-    write_snapshot(test_data)
+    write_snapshot(sample_data)
