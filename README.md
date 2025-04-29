@@ -28,10 +28,6 @@ No switches. No VLANs. Just real-time passive analysis over a direct wire.
 
 linealert-direct-connect/ ├── capture/serial_capture.py ├── snapshot/snapshot_writer.py ├── profile/auto_profiler.py ├── drift/afib_detector.py ├── test_data/example_serial_log.txt
 
-yaml
-Copy
-Edit
-
 ---
 
 ## ⚙️ Quick Start
