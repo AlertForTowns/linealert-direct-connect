@@ -1,0 +1,8 @@
+{
+  "serial_port": "/dev/ttyUSB0",
+  "max_packets": 200,
+  "encrypt_snapshot": true,
+  "encryption_password": "mysecretpass",
+  "baseline_profile": "profiles/baseline_profile.json",
+  "webhook_url": "https://hooks.slack.com/services/your/webhook/url"
+}
