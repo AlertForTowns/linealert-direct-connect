@@ -1,6 +1,11 @@
-# run_from_settings.py
 import json
-import linealert_cli
+import sys
+import os
+
+# Add the current directory to sys.path so Python can find 'tools'
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
+
+from tools import linealert_cli as cli
 
 def load_settings(path="settings.json"):
     with open(path, "r") as f:
@@ -8,7 +13,7 @@ def load_settings(path="settings.json"):
 
 def run():
     settings = load_settings()
-    
+
     class Args:
         port = settings["serial_port"]
         max = settings["max_packets"]
@@ -17,9 +22,8 @@ def run():
         baseline = settings.get("baseline_profile")
         webhook = settings.get("webhook_url")
 
-    # Emulate argparse args for CLI compatibility
-    linealert_cli.args = Args()
-    linealert_cli.main()
+    cli.args = Args()
+    cli.main()
 
 if __name__ == "__main__":
     run()
