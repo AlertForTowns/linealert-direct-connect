@@ -1,25 +1,30 @@
-version: '3'
+version: '3.8'
+
 services:
-  modbus:
-    image: cybcon/modbus-server # Replace with your Modbus image if necessary
+  # Modbus Server Container
+  modbus-server:
+    image: oitc/modbus-server
     container_name: modbus-server
-    network_mode: "host"  # Use host networking mode for the Modbus server
     ports:
-      - "5020:5020"  # Modbus TCP port
-    # no need for networks section when using host networking
-  
+      - "5020:5020" # Exposing the Modbus port
+    networks:
+      - modbus-net
+    environment:
+      - MODBUS_TCP_PORT=5020
+    restart: unless-stopped
+
+  # Node-RED Container
   node-red:
     image: nodered/node-red
     container_name: node-red
-    network_mode: "host"  # Use host networking mode for Node-RED
     ports:
-      - "1880:1880"  # Node-RED web interface port
-    environment:
-      - NODE_RED_USERNAME=your-username
-      - NODE_RED_PASSWORD=your-password
+      - "1880:1880" # Exposing the Node-RED web UI port
+    networks:
+      - modbus-net
     volumes:
-      - ./node-red:/data  # Persist Node-RED data
-    depends_on:
-      - modbus  # Ensure Modbus starts before Node-RED
+      - ./node-red:/data # Mount Node-RED flows to persist them
+    restart: unless-stopped
 
-# No need for networks section since we're using host networking
+networks:
+  modbus-net:
+    driver: bridge
