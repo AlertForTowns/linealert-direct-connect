@@ -1,0 +1,256 @@
+[
+    {
+        "id": "b47d6c69fa14a3ea",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c2c1e8dc13f85c9e",
+        "type": "junction",
+        "z": "b47d6c69fa14a3ea",
+        "x": 340,
+        "y": 1040,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "815ab417b2f36240",
+        "type": "junction",
+        "z": "b47d6c69fa14a3ea",
+        "x": 320,
+        "y": 1200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ad5e596eab0a7475",
+        "type": "junction",
+        "z": "b47d6c69fa14a3ea",
+        "x": 400,
+        "y": 1020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1bab66926c8d8466",
+        "type": "junction",
+        "z": "b47d6c69fa14a3ea",
+        "x": 520,
+        "y": 1260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "53a76f0d953eae5f",
+        "type": "junction",
+        "z": "b47d6c69fa14a3ea",
+        "x": 360,
+        "y": 1120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0781b21132a2dd0d",
+        "type": "junction",
+        "z": "b47d6c69fa14a3ea",
+        "x": 340,
+        "y": 1080,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7e6a78944fbea43f",
+        "type": "junction",
+        "z": "b47d6c69fa14a3ea",
+        "x": 440,
+        "y": 1120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c104aabbff85ad5b",
+        "type": "modbus-client",
+        "name": "Modbus Server",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": true,
+        "queueLogEnabled": true,
+        "failureLogEnabled": true,
+        "tcpHost": "192.168.0.16",
+        "tcpPort": "5020",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": 9600,
+        "serialDatabits": 8,
+        "serialStopbits": 1,
+        "serialParity": "none",
+        "serialConnectionDelay": 100,
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": 1,
+        "commandDelay": 1,
+        "clientTimeout": 1000,
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": 2000,
+        "parallelUnitIdsAllowed": true,
+        "showErrors": true,
+        "showWarnings": true,
+        "showLogs": true
+    },
+    {
+        "id": "1b4a69177b29566d",
+        "type": "http in",
+        "z": "b47d6c69fa14a3ea",
+        "name": "Post",
+        "url": "/drift",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 1040,
+        "wires": [
+            [
+                "0781b21132a2dd0d"
+            ]
+        ]
+    },
+    {
+        "id": "082b1331b3e63ca7",
+        "type": "modbus-read",
+        "z": "b47d6c69fa14a3ea",
+        "name": "Modbus",
+        "topic": "",
+        "showStatusActivities": true,
+        "logIOActivities": false,
+        "showErrors": true,
+        "showWarnings": true,
+        "unitid": "1",
+        "dataType": "HoldingRegister",
+        "adr": "0",
+        "quantity": "2",
+        "rate": "5000",
+        "rateUnit": "ms",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "c104aabbff85ad5b",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": true,
+        "x": 310,
+        "y": 1100,
+        "wires": [
+            [
+                "eb027a5df62e0d84",
+                "7e6a78944fbea43f"
+            ],
+            [
+                "b977482441d1bc0d"
+            ]
+        ]
+    },
+    {
+        "id": "df00fa539c4a8c11",
+        "type": "inject",
+        "z": "b47d6c69fa14a3ea",
+        "name": "",
+        "props": [
+            {
+                "p": "schema",
+                "v": "{\"tag\":\"Temperature\",\"value\":25.5,\"severity\":\"Low\",\"change\":\"5.5%\",\"timestamp\":\"2025-05-12T21:36:16\"}",
+                "vt": "json"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 170,
+        "y": 880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "eb027a5df62e0d84",
+        "type": "debug",
+        "z": "b47d6c69fa14a3ea",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload",
+        "statusType": "msg",
+        "x": 590,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "74bb7505495b0fc8",
+        "type": "debug",
+        "z": "b47d6c69fa14a3ea",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload",
+        "statusType": "msg",
+        "x": 510,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "1320b3c47151da26",
+        "type": "debug",
+        "z": "b47d6c69fa14a3ea",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "msg",
+        "x": 470,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "b977482441d1bc0d",
+        "type": "function",
+        "z": "b47d6c69fa14a3ea",
+        "name": "function 1",
+        "func": "// Check if responseBuffer is present\nif (msg.responseBuffer && Buffer.isBuffer(msg.responseBuffer)) {\n    try {\n        // Decode the buffer as a float (Big Endian) or modify according to your expected type\n        var decodedValue = msg.responseBuffer.readFloatBE(0);\n        msg.payload = decodedValue;\n        node.warn(\"Decoded float value: \" + decodedValue);\n    } catch (err) {\n        node.warn(\"Error decoding buffer as float: \" + err);\n        msg.payload = \"Error decoding buffer\";\n    }\n} else {\n    // Log the error if responseBuffer is missing or invalid\n    node.warn(\"responseBuffer is missing or not a valid Buffer.\");\n    msg.payload = \"responseBuffer is missing or invalid\";\n}\n\nreturn msg;\n\n\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 1220,
+        "wires": [
+            [
+                "1320b3c47151da26"
+            ]
+        ]
+    }
+]
