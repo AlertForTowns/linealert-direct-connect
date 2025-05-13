@@ -1,43 +1,25 @@
-version: '3.8'
-
+version: '3'
 services:
-  # Modbus Server Service
-  modbus-server:
-    build: ./modbus-server  # Points to the modbus-server directory where Dockerfile is
+  modbus:
+    image: cybcon/modbus-server # Replace with your Modbus image if necessary
+    container_name: modbus-server
+    network_mode: "host"  # Use host networking mode for the Modbus server
     ports:
-      - "15021:5020"  # Map port 15021 on the host to 5020 in the container
+      - "5020:5020"  # Modbus TCP port
+    # no need for networks section when using host networking
+  
+  node-red:
+    image: nodered/node-red
+    container_name: node-red
+    network_mode: "host"  # Use host networking mode for Node-RED
+    ports:
+      - "1880:1880"  # Node-RED web interface port
+    environment:
+      - NODE_RED_USERNAME=your-username
+      - NODE_RED_PASSWORD=your-password
     volumes:
-      - ./modbus-server:/app  # Mount the modbus-server directory to /app in the container
-    environment:
-      - MODBUS_HOST=0.0.0.0
-      - MODBUS_PORT=5020
-    command: python -u /app/drift_server.py  # Start the drift_server.py script when container runs
-    networks:
-      - linealert-network
-
-  # Flask Backend Service
-  backend:
-    build: ./backend  # Points to the backend directory
-    ports:
-      - "5007:5007"  # Expose port 5007 for the Flask backend
-    environment:
-      - FLASK_APP=flask_stream_backend.py  # Ensure Flask points to the correct app file
-      - FLASK_ENV=development
+      - ./node-red:/data  # Persist Node-RED data
     depends_on:
-      - modbus-server  # Make sure modbus-server is started before backend
-    networks:
-      - linealert-network
+      - modbus  # Ensure Modbus starts before Node-RED
 
-  # Frontend Service
-  frontend:
-    build: ./web  # Point to the web frontend directory
-    ports:
-      - "3000:3000"  # Expose port 3000 for the frontend
-    networks:
-      - linealert-network
-
-  # Database or other services can be added here
-
-networks:
-  linealert-network:
-    driver: bridge
+# No need for networks section since we're using host networking
