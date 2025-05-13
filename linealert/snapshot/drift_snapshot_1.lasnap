@@ -1,0 +1,24 @@
+{
+  "snapshot_id": "drift_snapshot_1",
+  "captured_at": "2025-05-07T22:10:53.840750Z",
+  "agent_version": "v1.0.0-drift",
+  "data": {
+    "packets": [
+      {
+        "timestamp": "2025-05-07T22:10:53.840750Z",
+        "src": "10.0.0.5",
+        "dst": "10.0.0.10",
+        "protocol": "ModbusTCP",
+        "function_code": 3,
+        "register": 40001,
+        "value": 100
+      }
+    ],
+    "traffic_summary": {
+      "total_packets": 1,
+      "protocols": [
+        "ModbusTCP"
+      ]
+    }
+  }
+}

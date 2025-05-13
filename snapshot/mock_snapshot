@@ -1,0 +1,24 @@
+{
+  "snapshot_id": "mock_snapshot",
+  "captured_at": "2025-05-07T23:02:52.994940Z",
+  "agent_version": "v1.0.0",
+  "data": {
+    "packets": [
+      {
+        "timestamp": "2025-05-07T23:02:52.994948Z",
+        "src": "10.0.0.5",
+        "dst": "10.0.0.10",
+        "protocol": "ModbusTCP",
+        "function_code": 3,
+        "register": 40001,
+        "value": 120
+      }
+    ],
+    "traffic_summary": {
+      "total_packets": 1,
+      "protocols": [
+        "ModbusTCP"
+      ]
+    }
+  }
+}

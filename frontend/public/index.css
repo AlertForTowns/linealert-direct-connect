@@ -1,0 +1,14 @@
+/* src/index.css */
+
+/* Basic body styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Add some styling for the app */
+#root {
+  padding: 20px;
+}

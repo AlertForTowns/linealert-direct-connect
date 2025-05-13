@@ -1,0 +1,39 @@
+/* General Alert Styles */
+.alert-details {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-top: 20px;
+  background-color: #f9f9f9;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+li:hover {
+  opacity: 0.7;
+}
+
+/* Severity-based Styles */
+li.red {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+li.yellow {
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
+
+li.green {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}

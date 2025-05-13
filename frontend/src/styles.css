@@ -1,0 +1,37 @@
+/* General styling */
+body {
+  font-family: Arial, sans-serif;
+}
+
+.alert {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* Color codes for different severity levels */
+.alert.Low {
+  background-color: lightgreen;
+}
+
+.alert.Moderate {
+  background-color: lightyellow;
+}
+
+.alert.Bad {
+  background-color: lightcoral;
+}
+
+.alert.Critical {
+  background-color: red;
+}
+
+/* Styling for alert details section */
+.alert-details {
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  font-size: 12px;
+}

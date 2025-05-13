@@ -1,0 +1,9 @@
+{
+  "40001": {
+    "min": 100,
+    "max": 130,
+    "last_seen": 130,
+    "stable_counter": 6,
+    "anomaly_counter": 6
+  }
+}

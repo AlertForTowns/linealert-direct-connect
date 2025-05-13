@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  # Modbus Server Service
+  modbus-server:
+    build: ./modbus-server  # Points to the modbus-server directory where Dockerfile is
+    ports:
+      - "15021:5020"  # Map port 15021 on the host to 5020 in the container
+    volumes:
+      - ./modbus-server:/app  # Mount the modbus-server directory to /app in the container
+    environment:
+      - MODBUS_HOST=0.0.0.0
+      - MODBUS_PORT=5020
+    command: python -u /app/drift_server.py  # Start the drift_server.py script when container runs
+    networks:
+      - linealert-network
+
+  # Flask Backend Service
+  backend:
+    build: ./backend  # Points to the backend directory
+    ports:
+      - "5007:5007"  # Expose port 5007 for the Flask backend
+    environment:
+      - FLASK_APP=flask_stream_backend.py  # Ensure Flask points to the correct app file
+      - FLASK_ENV=development
+    depends_on:
+      - modbus-server  # Make sure modbus-server is started before backend
+    networks:
+      - linealert-network
+
+  # Frontend Service
+  frontend:
+    build: ./web  # Point to the web frontend directory
+    ports:
+      - "3000:3000"  # Expose port 3000 for the frontend
+    networks:
+      - linealert-network
+
+  # Database or other services can be added here
+
+networks:
+  linealert-network:
+    driver: bridge

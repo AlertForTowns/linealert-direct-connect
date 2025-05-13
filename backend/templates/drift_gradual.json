@@ -1,0 +1,9 @@
+{
+  "carts": [
+    { "timestamp": "2025-05-01T22:53:00Z", "data": {"reg_0": 50, "reg_1": 51, "reg_2": 49}, "meta": {"label": "unlabeled", "drift_score": null, "stddev_delta": null} },
+    { "timestamp": "2025-05-01T22:53:03Z", "data": {"reg_0": 51, "reg_1": 52, "reg_2": 50}, "meta": {"label": "unlabeled", "drift_score": null, "stddev_delta": null} },
+    { "timestamp": "2025-05-01T22:53:06Z", "data": {"reg_0": 52, "reg_1": 53, "reg_2": 51}, "meta": {"label": "unlabeled", "drift_score": null, "stddev_delta": null} },
+    { "timestamp": "2025-05-01T22:53:09Z", "data": {"reg_0": 53, "reg_1": 54, "reg_2": 52}, "meta": {"label": "unlabeled", "drift_score": null, "stddev_delta": null} },
+    { "timestamp": "2025-05-01T22:53:12Z", "data": {"reg_0": 54, "reg_1": 55, "reg_2": 53}, "meta": {"label": "unlabeled", "drift_score": null, "stddev_delta": null} }
+  ]
+}

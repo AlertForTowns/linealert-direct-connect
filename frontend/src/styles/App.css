@@ -1,0 +1,49 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.filter {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+button {
+    margin: 0 10px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.alert, .drift-item {
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.alert {
+    border: 1px solid #ccc;
+}
+
+.alert.critical {
+    background-color: red;
+    color: white;
+}
+
+.alert.low {
+    background-color: green;
+    color: white;
+}
+
+.drift-item {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+}
+
+.drift-item p {
+    margin: 5px 0;
+}

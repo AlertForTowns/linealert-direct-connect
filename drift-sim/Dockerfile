@@ -1,0 +1,13 @@
+FROM python:3.9-slim
+WORKDIR /app
+COPY drift_server.py .
+RUN pip install flask
+ENV START_REG=0
+ENV REG_COUNT=5
+ENV PORT=15021
+ENV DRIFT_REGISTER=-1
+ENV DRIFT_TYPE=none
+ENV DRIFT_INTERVAL=10
+ENV DRIFT_AMOUNT=1
+EXPOSE ${PORT}
+CMD ["python", "drift_server.py"]

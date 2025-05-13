@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "tagged_at": "2025-05-07T22:04:48.083580+00:00",
+    "site": "Diamond Head Mall",
+    "device": "HVAC_Controller_01",
+    "location": "Roof Top",
+    "tagger_version": "v0.1"
+  },
+  "snapshot": {
+    "snapshot_id": "lasnap_mock_2025-05-07T17-30-00Z",
+    "captured_at": "2025-05-07T17:30:00Z",
+    "agent_version": "v1.0.0-mock",
+    "data": {
+      "packets": [
+        {
+          "timestamp": "2025-05-07T17:30:01Z",
+          "src": "10.0.0.5",
+          "dst": "10.0.0.10",
+          "protocol": "ModbusTCP",
+          "function_code": 3
+        },
+        {
+          "timestamp": "2025-05-07T17:30:02Z",
+          "src": "10.0.0.5",
+          "dst": "10.0.0.10",
+          "protocol": "ModbusTCP",
+          "function_code": 16
+        }
+      ],
+      "traffic_summary": {
+        "total_packets": 2,
+        "protocols": [
+          "ModbusTCP"
+        ]
+      }
+    }
+  }
+}
