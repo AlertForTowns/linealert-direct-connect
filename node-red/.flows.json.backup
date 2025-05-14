@@ -1,0 +1,265 @@
+[
+    {
+        "id": "cfa3959eb265481b",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4361d2da438db0ab",
+        "type": "junction",
+        "z": "cfa3959eb265481b",
+        "x": 340,
+        "y": 1040,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "28fa32a83cca8bd4",
+        "type": "junction",
+        "z": "cfa3959eb265481b",
+        "x": 320,
+        "y": 1200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b32d6e82dbad4e85",
+        "type": "junction",
+        "z": "cfa3959eb265481b",
+        "x": 400,
+        "y": 1020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a7f2b174df493f04",
+        "type": "junction",
+        "z": "cfa3959eb265481b",
+        "x": 520,
+        "y": 1260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dcb92ceadfc48513",
+        "type": "junction",
+        "z": "cfa3959eb265481b",
+        "x": 360,
+        "y": 1120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8ba88fe838f6224e",
+        "type": "junction",
+        "z": "cfa3959eb265481b",
+        "x": 340,
+        "y": 1080,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9d2066d1bd94c629",
+        "type": "junction",
+        "z": "cfa3959eb265481b",
+        "x": 440,
+        "y": 1120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c104aabbff85ad5b",
+        "type": "modbus-client",
+        "name": "Modbus Server",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": true,
+        "queueLogEnabled": true,
+        "failureLogEnabled": true,
+        "tcpHost": "192.168.0.16",
+        "tcpPort": "5020",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": 9600,
+        "serialDatabits": 8,
+        "serialStopbits": 1,
+        "serialParity": "none",
+        "serialConnectionDelay": 100,
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": 1,
+        "commandDelay": 1,
+        "clientTimeout": 1000,
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": 2000,
+        "parallelUnitIdsAllowed": true,
+        "showErrors": true,
+        "showWarnings": true,
+        "showLogs": true
+    },
+    {
+        "id": "de96c39d0723aeec",
+        "type": "modbus-client",
+        "name": "Modbus TCP Client",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "failureLogEnabled": true,
+        "tcpHost": "127.0.0.1",
+        "tcpPort": "5020",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": 9600,
+        "serialDatabits": 8,
+        "serialStopbits": 1,
+        "serialParity": "none",
+        "serialConnectionDelay": 100,
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": 1,
+        "commandDelay": 1,
+        "clientTimeout": 2000,
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": 4000,
+        "parallelUnitIdsAllowed": true,
+        "showErrors": false,
+        "showWarnings": true,
+        "showLogs": true
+    },
+    {
+        "id": "edbf0787428e270e",
+        "type": "http in",
+        "z": "cfa3959eb265481b",
+        "name": "Post",
+        "url": "/drift",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 1040,
+        "wires": [
+            [
+                "8ba88fe838f6224e"
+            ]
+        ]
+    },
+    {
+        "id": "e0bbc5e75da20e88",
+        "type": "inject",
+        "z": "cfa3959eb265481b",
+        "name": "",
+        "props": [
+            {
+                "p": "schema",
+                "v": "{\"tag\":\"Temperature\",\"value\":25.5,\"severity\":\"Low\",\"change\":\"5.5%\",\"timestamp\":\"2025-05-12T21:36:16\"}",
+                "vt": "json"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 170,
+        "y": 880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7a0a9bf04b62ee27",
+        "type": "debug",
+        "z": "cfa3959eb265481b",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload",
+        "statusType": "msg",
+        "x": 590,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "d0df5b0a1ebd8aa7",
+        "type": "debug",
+        "z": "cfa3959eb265481b",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "msg",
+        "x": 470,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "06487592037e0c1a",
+        "type": "function",
+        "z": "cfa3959eb265481b",
+        "name": "function 1",
+        "func": "if (msg.responseBuffer && Buffer.isBuffer(msg.responseBuffer)) {\n    try {\n        var decodedValue = msg.responseBuffer.readFloatBE(0);\n        msg.payload = decodedValue;\n        node.warn(\"Decoded float value: \" + decodedValue);\n    } catch (err) {\n        node.warn(\"Error decoding buffer as float: \" + err);\n        msg.payload = \"Error decoding buffer\";\n    }\n} else {\n    node.warn(\"responseBuffer is missing or not valid.\");\n    node.warn(msg);\n    msg.payload = \"responseBuffer is missing or invalid\";\n}\n\nreturn msg;\n\n\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "x": 360,
+        "y": 1220,
+        "wires": [
+            [
+                "d0df5b0a1ebd8aa7"
+            ]
+        ]
+    },
+    {
+        "id": "334ebf3ca8df7eaa",
+        "type": "modbus-read",
+        "z": "cfa3959eb265481b",
+        "name": "Modbus-Read",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "1",
+        "dataType": "HoldingRegister",
+        "adr": "0",
+        "quantity": "2",
+        "rate": "1000",
+        "rateUnit": "ms",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "de96c39d0723aeec",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 390,
+        "y": 1080,
+        "wires": [
+            [
+                "7a0a9bf04b62ee27"
+            ],
+            [
+                "06487592037e0c1a"
+            ]
+        ]
+    }
+]

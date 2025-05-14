@@ -1,0 +1,17 @@
+# Use the official Node-RED image
+FROM nodered/node-red
+
+# Set the working directory
+WORKDIR /data
+
+# Install Modbus Node for Node-RED
+RUN npm install node-red-contrib-modbus
+
+# Copy the flow file (which contains the Modbus configuration) into the container
+COPY flows.json /data/
+
+# Expose the Node-RED web UI port (1880)
+EXPOSE 1880
+
+# Command to run Node-RED
+CMD ["node-red"]

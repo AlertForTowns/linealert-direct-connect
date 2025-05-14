@@ -1,29 +1,35 @@
 version: '3.8'
-
 services:
-  # Modbus Server Container
   modbus-server:
-    image: oitc/modbus-server
+    build:
+      context: .
+      dockerfile: Dockerfile.modbus-server
     container_name: modbus-server
     ports:
-      - "5020:5020" # Exposing the Modbus port
+      - "5020:5020"  # Expose Modbus TCP port
     networks:
       - modbus-net
     environment:
-      - MODBUS_TCP_PORT=5020
-    restart: unless-stopped
+      - MODBUS_HOST=modbus-server
+      - MODBUS_PORT=5020
+    volumes:
+      - ./modbus_server.py:/app/modbus_server.py
+    restart: always
 
-  # Node-RED Container
   node-red:
-    image: nodered/node-red
+    build:
+      context: .
+      dockerfile: Dockerfile.node-red
     container_name: node-red
     ports:
-      - "1880:1880" # Exposing the Node-RED web UI port
+      - "1880:1880"  # Expose Node-RED web UI
     networks:
       - modbus-net
+    depends_on:
+      - modbus-server
     volumes:
-      - ./node-red:/data # Mount Node-RED flows to persist them
-    restart: unless-stopped
+      - ~/.node-red:/data
+    restart: always
 
 networks:
   modbus-net:
