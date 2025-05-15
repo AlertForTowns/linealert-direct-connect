@@ -1,19 +1,18 @@
-# Use an official Python runtime as a base image
 FROM python:3.12-slim
 
-# Set the working directory inside the container
+# Set the working directory
 WORKDIR /app
 
-# Install necessary system dependencies
+# Install system dependencies for networking and troubleshooting
 RUN apt-get update && apt-get install -y \
     iputils-ping \
-    net-tools \
-    curl \
-    vim \
+    netcat-openbsd \
+    iproute2 \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
-RUN pip install pymodbus
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 
 # Copy your custom Modbus server script into the container
 COPY modbus_server.py /app/
@@ -21,5 +20,5 @@ COPY modbus_server.py /app/
 # Expose the Modbus TCP port (5020)
 EXPOSE 5020
 
-# Command to run the Modbus server script
+# Command to run the Modbus server
 CMD ["python", "modbus_server.py"]

@@ -1,35 +1,38 @@
 version: '3.8'
+
 services:
   modbus-server:
     build:
       context: .
       dockerfile: Dockerfile.modbus-server
-    container_name: modbus-server
-    ports:
-      - "5020:5020"  # Expose Modbus TCP port
+    container_name: linealert-direct-connect_modbus-server
     networks:
       - modbus-net
-    environment:
-      - MODBUS_HOST=modbus-server
-      - MODBUS_PORT=5020
-    volumes:
-      - ./modbus_server.py:/app/modbus_server.py
+    ports:
+      - "5020:5020"
     restart: always
+    environment:
+      - MODBUS_LOG_LEVEL=debug
+    volumes:
+      - ./logs:/var/log/modbus  # Map local directory to container logs
+      - ./modbus_config:/app/config  # Optional: To persist configuration files if needed
 
   node-red:
     build:
       context: .
       dockerfile: Dockerfile.node-red
-    container_name: node-red
-    ports:
-      - "1880:1880"  # Expose Node-RED web UI
+    container_name: linealert-direct-connect_node-red
     networks:
       - modbus-net
-    depends_on:
-      - modbus-server
-    volumes:
-      - ~/.node-red:/data
+    ports:
+      - "1880:1880"
     restart: always
+    environment:
+      - NODE_RED_LOG_LEVEL=debug
+    volumes:
+      - ./flows:/data
+      - ./logs:/data/logs  # Map local directory to container logs
+      - ./node-red_config:/data/.node-red  # Optional: Persist Node-RED settings
 
 networks:
   modbus-net:

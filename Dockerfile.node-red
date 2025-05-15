@@ -1,17 +1,20 @@
 # Use the official Node-RED image
-FROM nodered/node-red
+FROM nodered/node-red:latest
 
-# Set the working directory
-WORKDIR /data
-
-# Install Modbus Node for Node-RED
+# Install the Modbus module for Node-RED
 RUN npm install node-red-contrib-modbus
 
-# Copy the flow file (which contains the Modbus configuration) into the container
-COPY flows.json /data/
+# Copy the custom entrypoint script into the container
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
-# Expose the Node-RED web UI port (1880)
+# Switch to root user to set permissions
+USER root
+
+# Make sure the script is executable
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Set the entrypoint for the container
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
+# Expose the necessary port for Node-RED's web UI
 EXPOSE 1880
-
-# Command to run Node-RED
-CMD ["node-red"]

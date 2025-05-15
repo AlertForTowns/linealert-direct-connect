@@ -1,23 +1,28 @@
-from pymodbus.server.sync import StartTcpServer
-from pymodbus.datastore import ModbusSparseDataBlock
-from pymodbus.datastore import ModbusServerContext
+from pymodbus.server.sync import ModbusTcpServer
 from pymodbus.device import ModbusDeviceIdentification
+from pymodbus.datastore import ModbusSlaveContext, ModbusSequentialDataBlock  # Correct imports
+from pymodbus.client.sync import ModbusTcpClient
 
-# Define the registers (e.g., Holding Registers at address 0)
-data = {
-    0: 25.5,   # Example value (can be updated dynamically)
-    1: 32.1,
-    2: 45.0
-}
+# Initialize the datastore with sequential data blocks
+store = ModbusSlaveContext(
+    di=ModbusSequentialDataBlock(0, [17]*100),  # Digital Inputs
+    co=ModbusSequentialDataBlock(0, [17]*100),  # Coils
+    hr=ModbusSequentialDataBlock(0, [17]*100),  # Holding Registers
+    ir=ModbusSequentialDataBlock(0, [17]*100)   # Input Registers
+)
 
-# Create a Modbus data block and assign it to a Modbus context
-store = ModbusSparseDataBlock(data)
-context = ModbusServerContext(historian=store, single=True)
+# Use ModbusSlaveContext instead of ModbusServerContext
+context = ModbusSlaveContext(slaves=store, single=True)
 
-# Set up the Modbus TCP server on port 5020
+# Configure server identity
 identity = ModbusDeviceIdentification()
-identity.VendorName = 'Your Company'
-identity.ProductCode = 'Modbus Server'
+identity.VendorName = 'PyModbus'
+identity.ProductCode = 'PM'
+identity.VendorUrl = 'http://github.com/pymodbus/pymodbus'
+identity.ProductName = 'PyModbus Server'
+identity.ModelName = 'PyModbus Model'
+identity.MajorMinorRevision = '1.0'
 
-# Start the server
-StartTcpServer(context, identity=identity, address=("0.0.0.0", 5020))
+# Start the TCP server
+server = ModbusTcpServer(context, identity=identity, address=("0.0.0.0", 5020))
+server.serve_forever()

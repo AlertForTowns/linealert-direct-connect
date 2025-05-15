@@ -1,0 +1,58 @@
+[
+  {
+    "id": "b57d5c1fe88c9d0e",
+    "type": "file in",
+    "z": "a8bcd874",
+    "name": "Read Modbus Data",
+    "filename": "/data/modbus_data.json",
+    "format": "utf8",
+    "x": 200,
+    "y": 100,
+    "wires": [
+      ["bce8d1d07c9b89f3"]
+    ]
+  },
+  {
+    "id": "bce8d1d07c9b89f3",
+    "type": "json",
+    "z": "a8bcd874",
+    "name": "Parse JSON",
+    "x": 350,
+    "y": 100,
+    "wires": [
+      ["d827b702c9c9d5a8"]
+    ]
+  },
+  {
+    "id": "d827b702c9c9d5a8",
+    "type": "modbus-client",
+    "z": "a8bcd874",
+    "name": "Modbus Server",
+    "clienttype": "tcp",
+    "tcpHost": "172.19.0.3",
+    "tcpPort": "5020",
+    "unit_id": "1",
+    "dataType": "HoldingRegister",
+    "adr": "0",
+    "quantity": "2",
+    "rate": "1000",
+    "x": 500,
+    "y": 100,
+    "wires": [
+      ["09a8d74096d8c89f"]
+    ]
+  },
+  {
+    "id": "09a8d74096d8c89f",
+    "type": "file",
+    "z": "a8bcd874",
+    "name": "Write JSON Data",
+    "filename": "/data/modbus_data.json",
+    "appendNewline": true,
+    "createDir": true,
+    "overwriteFile": "false",
+    "x": 650,
+    "y": 100,
+    "wires": []
+  }
+]
