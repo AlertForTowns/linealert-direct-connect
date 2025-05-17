@@ -1,0 +1,15 @@
+{
+  "timestamp": "2025-05-16T13:35:04.935589+00:00",
+  "device": "linealert-test-device",
+  "severity": "YELLOW",
+  "message": "Drift detected! Previous avg: 99.00, Current value: 90.00, Drift: -9.09%",
+  "drift_register": 0,
+  "value": 90,
+  "holding_registers": [
+    90,
+    101,
+    102,
+    103,
+    104
+  ]
+}
