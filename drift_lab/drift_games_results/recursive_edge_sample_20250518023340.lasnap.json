@@ -1,0 +1,9 @@
+{
+  "drift_score": 1,
+  "explanation": "flow drifted by 23 units",
+  "context_considered": {
+    "shift": "evening",
+    "operator": "simulated",
+    "machine_id": "capper-001"
+  }
+}

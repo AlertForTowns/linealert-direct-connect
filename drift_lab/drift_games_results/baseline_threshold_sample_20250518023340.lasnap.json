@@ -1,0 +1,9 @@
+{
+  "drift_score": 3,
+  "explanation": "Detected drift with score 3 based on pressure, temp, and RPM",
+  "context_considered": {
+    "shift": "evening",
+    "operator": "simulated",
+    "machine_id": "capper-001"
+  }
+}

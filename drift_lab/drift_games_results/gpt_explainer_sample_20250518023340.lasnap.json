@@ -1,0 +1,9 @@
+{
+  "drift_score": 1,
+  "explanation": "This would be replaced by GPT-generated context summary.",
+  "context_considered": {
+    "shift": "evening",
+    "operator": "simulated",
+    "machine_id": "capper-001"
+  }
+}

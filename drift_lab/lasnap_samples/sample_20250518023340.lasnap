@@ -1,0 +1,15 @@
+{
+  "timestamp": "2025-05-18T02:33:40.241912",
+  "metrics": {
+    "pressure": 118,
+    "temperature": 52,
+    "flow": 197,
+    "rpm": 1440,
+    "torque": 67
+  },
+  "context": {
+    "shift": "evening",
+    "operator": "simulated",
+    "machine_id": "capper-001"
+  }
+}

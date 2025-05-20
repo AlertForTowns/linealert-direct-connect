@@ -1,0 +1,9 @@
+{
+  "drift_score": 0,
+  "explanation": "Afib-style drift detected: ",
+  "context_considered": {
+    "shift": "evening",
+    "operator": "simulated",
+    "machine_id": "capper-001"
+  }
+}
